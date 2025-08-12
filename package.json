@@ -1,0 +1,23 @@
+{
+  "name": "well-architected-syd",
+  "description": "Demo for Well Architected Sydney meetup on August 14, 2025",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "npx prettier --write ."
+  },
+  "author": "Lindsay Holmwood <lindsay@cipherstash.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.864.0",
+    "@aws-sdk/lib-dynamodb": "^3.864.0",
+    "@cipherstash/protect": "^9.5.0",
+    "@cipherstash/protect-dynamodb": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.152",
+    "prettier": "^3.6.2"
+  }
+}
