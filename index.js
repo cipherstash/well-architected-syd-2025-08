@@ -32,10 +32,12 @@ if (encryptResult.failure) {
 const client = new DynamoDBClient({});
 const docClient = DynamoDBDocumentClient.from(client);
 
+console.log(encryptResult.data);
+
 // Store in DynamoDB
 await docClient.send(
   new PutCommand({
-    TableName: "Users",
+    TableName: users.tableName,
     Item: encryptResult.data,
   })
 );
