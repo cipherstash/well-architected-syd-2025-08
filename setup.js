@@ -56,7 +56,8 @@ const createTableCommandResponse = await docClient.send(
         AttributeType: "N",
       },
       */
-      { AttributeName: "email", AttributeType: "S" },
+      { AttributeName: "email__hmac", AttributeType: "S" },
+      //{ AttributeName: "email__source", AttributeType: "S" },
     ],
     // The KeySchema defines the primary key. The primary key can be
     // a partition key, or a combination of a partition key and a sort key.
@@ -67,8 +68,15 @@ const createTableCommandResponse = await docClient.send(
       // The movies table will be queried for movies by year. It makes sense
       // to make year our partition (HASH) key.
       //{ AttributeName: "year", KeyType: "HASH" },
-      { AttributeName: "email", KeyType: "HASH" },
+      { AttributeName: "email__hmac", KeyType: "HASH" },
     ],
   })
 );
+
+// wait for the damn table to be created in dynamo
+do {
+  console.log(`checking if table ${tableName} created...`);
+  listTablesCommandResponse = await docClient.send(new ListTablesCommand({}));
+  await sleep(500);
+} while (!listTablesCommandResponse.TableNames.includes(tableName));
 console.log(`table created: ${tableName}`);

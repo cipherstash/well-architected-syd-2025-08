@@ -35,12 +35,14 @@ const docClient = DynamoDBDocumentClient.from(client);
 console.log(encryptResult.data);
 
 // Store in DynamoDB
-await docClient.send(
-  new PutCommand({
-    TableName: users.tableName,
-    Item: encryptResult.data,
-  })
-);
+const put = new PutCommand({
+  TableName: users.tableName,
+  Item: encryptResult.data,
+});
+console.log(put);
+await docClient.send(put);
+
+process.exit(0);
 
 // Create search terms for querying
 const searchTermsResult = await protectDynamo.createSearchTerms([
@@ -50,19 +52,21 @@ const searchTermsResult = await protectDynamo.createSearchTerms([
     table: users,
   },
 ]);
+console.log("searchtermsresult", searchTermsResult);
 
 if (searchTermsResult.failure) {
   throw new Error(`Failed to create search terms: ${searchTermsResult.failure.message}`);
 }
 
 // Query using the search term
-const [emailHmac] = searchTermsResult.data;
-const result = await docClient.send(
-  new GetCommand({
-    TableName: "Users",
-    Key: { email__hmac: emailHmac },
-  })
-);
+const getCommand = new GetCommand({
+  TableName: users.tableName,
+  Key: {
+    email__hmac: searchTermsResult.data[0],
+  },
+});
+console.log(getCommand);
+const result = await docClient.send(getCommand);
 
 if (!result.Item) {
   throw new Error("Item not found");
@@ -76,3 +80,4 @@ if (decryptResult.failure) {
 }
 
 const decryptedUser = decryptResult.data;
+console.log("decryptedUser", decryptedUser);
