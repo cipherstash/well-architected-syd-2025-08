@@ -7,8 +7,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "npx prettier --write .",
-    "dev": "npm run setup && sleep 5 && npm run examples",
-    "setup": "if [ -n \"${CLEAN}\" ]; then node setup.js ; fi",
+    "dev": "if [ -n \"${SETUP}\" ]; then npm run setup ; fi && sleep 5 && npm run insert && npm run examples",
+    "setup": "node setup.js",
+    "insert": "node insert.js",
     "examples": "node index.js"
   },
   "author": "Lindsay Holmwood <lindsay@cipherstash.com>",
