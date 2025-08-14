@@ -4,7 +4,7 @@ import { PutCommand, GetCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dyn
 import { DynamoDBClient, BatchWriteItemCommand } from "@aws-sdk/client-dynamodb";
 
 // Define your protected table schema
-const users = csTable("users", {
+export const users = csTable("users", {
   email: csColumn("email").equality(),
 });
 
@@ -19,7 +19,7 @@ const protectDynamo = protectDynamoDB({
 });
 
 // Encrypt and store a user
-const exampleUsers = [
+export const exampleUsers = [
   { email: "alice@example.com" },
   { email: "bob@company.org" },
   { email: "carol@tech.io" },

@@ -2,11 +2,7 @@ import { protectDynamoDB } from "@cipherstash/protect-dynamodb";
 import { protect, csColumn, csTable } from "@cipherstash/protect";
 import { PutCommand, GetCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { DynamoDBClient, BatchWriteItemCommand } from "@aws-sdk/client-dynamodb";
-
-// Define your protected table schema
-const users = csTable("users", {
-  email: csColumn("email").equality(),
-});
+import { users, exampleUsers } from "./insert.js";
 
 // Initialize the Protect client
 const protectClient = await protect({
@@ -82,13 +78,6 @@ const items = {
 // Setup a DynamoDB client
 const client = new DynamoDBClient({});
 const docClient = DynamoDBDocumentClient.from(client);
-
-console.log(encryptResult.data);
-console.log(items);
-
-// Store in DynamoDB
-const batchWrite = new BatchWriteItemCommand(items);
-await docClient.send(batchWrite);
 
 // Create search terms for querying
 const searchTermsResult = await protectDynamo.createSearchTerms([
