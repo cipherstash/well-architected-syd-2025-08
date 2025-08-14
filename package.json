@@ -10,7 +10,7 @@
     "dev": "if [ -n \"${SETUP}\" ]; then npm run setup ; fi && sleep 5 && npm run insert && npm run examples",
     "setup": "node setup.js",
     "insert": "node insert.js",
-    "examples": "node index.js"
+    "query": "node query.js"
   },
   "author": "Lindsay Holmwood <lindsay@cipherstash.com>",
   "license": "MIT",
