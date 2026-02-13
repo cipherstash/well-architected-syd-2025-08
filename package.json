@@ -15,8 +15,8 @@
   "author": "Lindsay Holmwood <lindsay@cipherstash.com>",
   "license": "MIT",
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.864.0",
-    "@aws-sdk/lib-dynamodb": "^3.864.0",
+    "@aws-sdk/client-dynamodb": "^3.987.0",
+    "@aws-sdk/lib-dynamodb": "^3.987.0",
     "@cipherstash/protect": "^9.5.0",
     "@cipherstash/protect-dynamodb": "^3.0.0"
   },
